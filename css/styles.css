@@ -1,0 +1,8 @@
+body {
+    padding-top: 20px;
+}
+
+.center-pills {
+    display: flex;
+    justify-content: center;
+}
