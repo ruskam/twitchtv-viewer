@@ -1,8 +1,57 @@
 body {
     padding-top: 20px;
+    background-color: #FFDAB9;
 }
 
 .center-pills {
     display: flex;
     justify-content: center;
+}
+
+.nav-pills>li {
+    float: none;
+    display: inline-block;
+    *display: inline;
+    /* ie7 fix */
+    zoom: 1;
+    /* hasLayout ie7 trigger */
+}
+
+.nav-pills {
+    text-align: center;
+}
+
+.img-circle {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.img-tick {
+    margin-top: 15px;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+span {
+    font-size: 11px;
+    color: #ccc;
+    ;
+    display: flex;
+}
+
+.round {
+    border-radius: 15px;
+}
+
+#search-input {
+    background-image: url('searchicon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
 }
