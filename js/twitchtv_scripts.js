@@ -56,6 +56,7 @@ function User(userName, status, logoUrl) {
     this.logoUrl = logoUrl;
 }
 
+/* Search/Filter functionality */
 $('#search-input').keyup(function() {
     var valThis = this.value.toLowerCase();
 
