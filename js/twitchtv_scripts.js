@@ -19,8 +19,8 @@ $(document).ready(function() {
             success: function(data) {
                 if (data.stream != null) {
                     userObjects.push(new User(user, data.stream.channel.status, data.stream.channel.logo));
-
-                    usersListAll.append('<li class="list-group-item" id = "listelement"><a href="' + twitchUrl + user + '"  target="_blank"><div style="display:inline;"><img src="' + userObjects[userObjects.length - 1].logoUrl + '" class="img-circle" alt="user_logo"></div><div style="display:inline; white-space:nowrap; padding-left: 10px;">' + userObjects[userObjects.length - 1].userName + '<div style="display:inline;"><img src="http://www.iconsdb.com/icons/preview/green/checkmark-xxl.png" class="img-tick" alt="user_logo" align="right"></div></div></a></li>');
+                    var newListElement = '<a href="' + twitchUrl + user + '"  target="_blank" class="list-group-item list-group-item-action"><div style="display:inline;"><img src="' + userObjects[userObjects.length - 1].logoUrl + '" class="img-circle" alt="user_logo"></div><div style="display:inline; white-space:nowrap; padding-left: 10px;">' + userObjects[userObjects.length - 1].userName + '<div style="display:inline;"><img src="http://www.iconsdb.com/icons/preview/green/checkmark-xxl.png" class="img-tick" alt="user_logo" align="right"></div></div></a>';
+                    usersListAll.append(newListElement);
 
                     $usersListOn.append('<a href="' + twitchUrl + user + '" class="list-group-item list-group-item-action" target="_blank"><div style="display:inline;"><img src="' + userObjects[userObjects.length - 1].logoUrl + '" class="img-circle" alt="user_logo"></div><div style="display:inline; white-space:nowrap; padding-left: 10px;">' + userObjects[userObjects.length - 1].userName + '<div style="display:inline;"><img src="http://www.iconsdb.com/icons/preview/green/checkmark-xxl.png" class="img-tick" alt="user_logo" align="right"></div></div></a>');
 
@@ -33,8 +33,8 @@ $(document).ready(function() {
                         url: twitchUsersUrl + user,
                         success: function(dataUsers) {
                             userObjects.push(new User(user, null, dataUsers.logo));
-
-                            usersListAll.append('<li class="list-group-item" id = "listelement"><a href="' + twitchUrl + user + '" target="_blank"><div style="display:inline;"><img src="' + userObjects[userObjects.length - 1].logoUrl + '" class="img-circle" alt="user_logo"></div><div style="display:inline; white-space:nowrap; padding-left: 10px;">' + userObjects[userObjects.length - 1].userName + '<div style="display:inline;"><img src="https://cdn.iconscout.com/public/images/icon/free/png-512/exclamation-mark-outlined-punctuation-red-3702d20ebbcfb6cd-512x512.png" class="img-tick" alt="user_logo" align="right"></div></div></a></li>');
+                            var newListElement = '<a href="' + twitchUrl + user + '" target="_blank" class="list-group-item list-group-item-action"><div style="display:inline;"><img src="' + userObjects[userObjects.length - 1].logoUrl + '" class="img-circle" alt="user_logo"></div><div style="display:inline; white-space:nowrap; padding-left: 10px;">' + userObjects[userObjects.length - 1].userName + '<div style="display:inline;"><img src="https://cdn.iconscout.com/public/images/icon/free/png-512/exclamation-mark-outlined-punctuation-red-3702d20ebbcfb6cd-512x512.png" class="img-tick" alt="user_logo" align="right"></div></div></a></li>';
+                            usersListAll.append(newListElement);
 
                             $usersListOff.append('<a href="' + twitchUrl + user + '" class="list-group-item list-group-item-action" target="_blank"><div style="display:inline;"><img src="' + userObjects[userObjects.length - 1].logoUrl + '" class="img-circle" alt="user_logo"></div><div style="display:inline; white-space:nowrap; padding-left: 10px;">' + userObjects[userObjects.length - 1].userName + '<div style="display:inline;"><img src="https://cdn.iconscout.com/public/images/icon/free/png-512/exclamation-mark-outlined-punctuation-red-3702d20ebbcfb6cd-512x512.png" class="img-tick" alt="user_logo" align="right"></div></div></a>');
 
@@ -50,52 +50,43 @@ $(document).ready(function() {
 
 });
 
-$('#users-list-all').ready(function(){
-    console.log($('#users-list-all')[0]);
-});
-
-
 function User(userName, status, logoUrl) {
     this.userName = userName;
     this.status = status;
     this.logoUrl = logoUrl;
 }
 
-$('#search-input').keyup(function () {
-    var valThis = this.value.toLowerCase(),
-        lenght  = this.value.length;
+$('#search-input').keyup(function() {
+    var valThis = this.value.toLowerCase();
 
-    $('.navList>li').each(function () {
-        var text  = $(this).text();
-        var textL = text.toLowerCase();
-        var htmlR = '<b>' + text.substr(0, lenght) + '</b>' + text.substr(lenght);
-        if (textL.indexOf(valThis) == 0) {
-            $(this).html(htmlR).show();
+    $('#users-list-all>a').each(function() {
+        var text = $(this).text().toLowerCase();
+        var textHtml = $(this).html();
+
+        if (text.indexOf(valThis) == 0) {
+            $(this).html(textHtml).show();
         } else {
             $(this).hide();
         }
     });
 
-});
-/*
-function instantSearch() {
-    var input, filter, myList, listElement, a;
-    input = $('#search-input');
-    filter = input.val().toUpperCase();
-    myList = document.getElementById('#users-list-all');
-    console.log(myList);
-    a = myList.getElementsByTagName("a");
-    //console.log(a);
-    for (var i = 0; i < a.length; i++) {
-        //console.log(a[i].innerText);
-        if (a[i].innerText.toUpperCase().indexOf() > -1){
-            a[i].style.display = "";
-            //console.log(a[i].style.display);
+    $('#users-list-on>a').each(function() {
+        var text = $(this).text().toLowerCase();
+        var textHtml = $(this).html();
+
+        if (text.indexOf(valThis) == 0) {
+            $(this).html(textHtml).show();
         } else {
-            a[i].style.display = "none";
+            $(this).hide();
         }
-    }
-
-
-}
-*/
+    });
+    $('#users-list-off>a').each(function() {
+        var text = $(this).text().toLowerCase();
+        var textHtml = $(this).html();
+        if (text.indexOf(valThis) == 0) {
+            $(this).html(textHtml).show();
+        } else {
+            $(this).hide();
+        }
+    });
+});
